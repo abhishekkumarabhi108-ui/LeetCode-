@@ -1,5 +1,3 @@
-#include <stdbool.h>
-
 bool checkRecord(char* s) {
 
     int absent = 0;
@@ -9,21 +7,22 @@ bool checkRecord(char* s) {
 
         if (s[i] == 'A') {
             absent++;
-
-            if (absent >= 2)
-                return false;
-
-            late = 0;
         }
-        else if (s[i] == 'L') {
+
+        if (s[i] == 'L') {
             late++;
-
-            if (late >= 3)
-                return false;
-        }
-        else {
-            // P resets consecutive late count
+        } else {
             late = 0;
+        }
+
+        // More than 1 absence
+        if (absent >= 2) {
+            return false;
+        }
+
+        // 3 consecutive late days
+        if (late >= 3) {
+            return false;
         }
     }
 
